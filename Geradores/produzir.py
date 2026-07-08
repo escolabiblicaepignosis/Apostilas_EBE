@@ -7,7 +7,7 @@ Uso:
     python3 produzir.py 0002 0003       # produz apenas os números indicados
 
 Cada ficheiro conteudos/apo_XXXX.py define um dicionário APOSTILA.
-O framework gera .docx e .pdf na árvore Apostilas/Instituto/Escola/Curso/Módulo.
+O framework gera o .docx na árvore Apostilas/Instituto/Escola/Curso/Módulo.
 """
 import glob
 import importlib.util
@@ -17,7 +17,7 @@ import sys
 BASE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE)
 
-from apostila_framework import gerar_apostila
+from apostila_framework import gerar_docx
 
 
 def carregar(caminho):
@@ -40,7 +40,7 @@ def main():
         if apenas and numero not in apenas:
             continue
         A = carregar(f)
-        docx, pdf = gerar_apostila(A)
+        docx = gerar_docx(A)
         rel = os.path.relpath(os.path.dirname(docx), os.path.dirname(BASE))
         print(f"✔ EBE-APO-{A['meta']['numero_global']} — {A['meta']['titulo']}")
         print(f"   → {rel}/")
